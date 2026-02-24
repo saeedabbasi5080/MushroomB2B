@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="MushroomB2B.API/MushroomB2B.API.csproj" Id="2e306b92-c7d8-4d30-b0cb-72b2d7a49d79" />
+    <Project Path="MushroomB2B.Application/MushroomB2B.Application.csproj" />
+    <Project Path="MushroomB2B.Domain/MushroomB2B.Domain.csproj" />
+    <Project Path="MushroomB2B.Infrastructure/MushroomB2B.Infrastructure.csproj" />
+  </Folder>
+</Solution>

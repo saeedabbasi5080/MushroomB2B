@@ -1,0 +1,6 @@
+@MushroomB2B.API_HostAddress = http://localhost:5023
+
+GET {{MushroomB2B.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
