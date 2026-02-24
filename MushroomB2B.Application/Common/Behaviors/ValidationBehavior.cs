@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace MushroomB2B.Application.Common.Behaviors;
 

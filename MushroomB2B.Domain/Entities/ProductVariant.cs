@@ -10,6 +10,7 @@ public sealed class ProductVariant : BaseEntity
     public MushroomGrade Grade { get; private set; }
     public int WeightUnitKg { get; private set; }   // 5 or 10
     public int StockQuantity { get; private set; }
+    public Product Product { get; private set; } = default!;
 
     private ProductVariant() { }
 

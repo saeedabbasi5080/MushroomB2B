@@ -10,4 +10,14 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MushroomB2B.Domain\MushroomB2B.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

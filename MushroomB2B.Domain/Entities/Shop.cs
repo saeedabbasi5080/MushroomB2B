@@ -6,7 +6,7 @@ namespace MushroomB2B.Domain.Entities;
 
 public sealed class Shop : BaseEntity
 {
-    public required string OwnerName { get; private set; }
+    public string OwnerName { get; private set; }
     public Address Address { get; private set; } = default!;
     public decimal CreditLimit { get; private set; }
     public decimal WalletBalance { get; private set; }

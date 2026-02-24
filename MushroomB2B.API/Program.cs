@@ -5,6 +5,8 @@ using MushroomB2B.Application;
 using MushroomB2B.Domain.Exceptions;
 using MushroomB2B.Infrastructure;
 using System.ComponentModel.DataAnnotations;
+using ValidationException = FluentValidation.ValidationException;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MushroomB2B.Application\MushroomB2B.Application.csproj" />
+    <ProjectReference Include="..\MushroomB2B.Infrastructure\MushroomB2B.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

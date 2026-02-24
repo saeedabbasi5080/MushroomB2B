@@ -4,7 +4,7 @@ namespace MushroomB2B.Domain.Entities;
 
 public sealed class Product : BaseEntity
 {
-    public required string Name { get; private set; }
+    public string Name { get; private set; }
     public decimal BasePrice { get; private set; }
 
     private readonly List<ProductVariant> _variants = [];
