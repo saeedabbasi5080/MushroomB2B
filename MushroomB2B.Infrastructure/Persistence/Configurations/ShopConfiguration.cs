@@ -16,6 +16,9 @@ public sealed class ShopConfiguration : IEntityTypeConfiguration<Shop>
             .IsRequired()
             .HasMaxLength(200);
 
+        builder.Property(s => s.IsVerified).IsRequired().HasDefaultValue(false);
+
+
         // Address as owned value object — columns: Address_City, Address_Street, etc.
         builder.OwnsOne(s => s.Address, a =>
         {

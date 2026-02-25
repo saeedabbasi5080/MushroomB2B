@@ -1,20 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MediatR" Version="14.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+		<!-- اضافه شده برای پشتیبانی از ValidationException در Program.cs -->
+		<PackageReference Include="FluentValidation" Version="11.9.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MushroomB2B.Application\MushroomB2B.Application.csproj" />
-    <ProjectReference Include="..\MushroomB2B.Infrastructure\MushroomB2B.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MushroomB2B.Application\MushroomB2B.Application.csproj" />
+		<ProjectReference Include="..\MushroomB2B.Infrastructure\MushroomB2B.Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -10,9 +10,11 @@ public sealed class Shop : BaseEntity
     public Address Address { get; private set; } = default!;
     public decimal CreditLimit { get; private set; }
     public decimal WalletBalance { get; private set; }
+    public bool IsVerified { get; private set; } = false;
 
     private readonly List<Order> _orders = [];
     public IReadOnlyCollection<Order> Orders => _orders.AsReadOnly();
+    public Guid? UserId { get; private set; }
 
     // Required by EF Core
     private Shop() { OwnerName = string.Empty; }
@@ -71,6 +73,20 @@ public sealed class Shop : BaseEntity
     public void UpdateAddress(Address newAddress)
     {
         Address = newAddress ?? throw new ArgumentNullException(nameof(newAddress));
+        SetModified();
+    }
+
+    public void Verify()
+    {
+        IsVerified = true;
+        SetModified();
+    }
+
+    public void AssignUser(Guid userId)
+    {
+        if (userId == Guid.Empty)
+            throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+        UserId = userId;
         SetModified();
     }
 }

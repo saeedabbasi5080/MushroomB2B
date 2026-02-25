@@ -8,7 +8,8 @@ public sealed record Address
     public double? GeoLng { get; init; }
 
     // EF Core requires a parameterless constructor for owned types
-    private Address() { City = string.Empty; Street = string.Empty; }
+    //private Address() { City = string.Empty; Street = string.Empty; }
+    public Address() { City = string.Empty; Street = string.Empty; }
 
     public Address(string city, string street, double? geoLat = null, double? geoLng = null)
     {

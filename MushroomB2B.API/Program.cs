@@ -1,28 +1,58 @@
-using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.OpenApi.Models;
 using MushroomB2B.Application;
 using MushroomB2B.Domain.Exceptions;
 using MushroomB2B.Infrastructure;
-using System.ComponentModel.DataAnnotations;
 using ValidationException = FluentValidation.ValidationException;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ─── Layer DI Registration ──────────────────────────────────────────────────
-builder.Services.AddApplication();                          // MediatR + Validators
-builder.Services.AddInfrastructure(builder.Configuration);  // EF Core + Services
+// ── Layers ────────────────────────────────────────────────────────────────
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
-// ─── API ────────────────────────────────────────────────────────────────────
+// ── API ───────────────────────────────────────────────────────────────────
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "MushroomB2B API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MushroomB2B API", Version = "v1" });
+
+    c.CustomSchemaIds(type => type.FullName);
+
+    // JWT support in Swagger UI
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter your JWT token. Example: eyJhbGci..."
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
-// ─── Global Exception Handling ──────────────────────────────────────────────
+// ── Exception Handler ─────────────────────────────────────────────────────
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
@@ -36,12 +66,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
 
-
-// ─── Global Exception Handler (inline for brevity) ─────────────────────────
+// ── Global Exception Handler ──────────────────────────────────────────────
 public sealed class GlobalExceptionHandler : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(

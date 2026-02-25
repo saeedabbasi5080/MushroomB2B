@@ -11,6 +11,12 @@ public interface IAppDbContext
     DbSet<PriceTier> PriceTiers { get; }
     DbSet<Order> Orders { get; }
     DbSet<OrderItem> OrderItems { get; }
+    DbSet<Driver> Drivers { get; }
+    DbSet<DeliveryBatch> DeliveryBatches { get; }
+    DbSet<DeliveryItem> DeliveryItems { get; }
+    DbSet<User> Users { get; }
+    DbSet<OtpCode> OtpCodes { get; }
+
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

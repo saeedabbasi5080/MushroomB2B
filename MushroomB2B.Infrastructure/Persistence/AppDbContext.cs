@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using MushroomB2B.Application.Interfaces;
 using MushroomB2B.Domain.Entities;
-using System.Reflection;
-using System.Reflection.Emit;
+
 
 namespace MushroomB2B.Infrastructure.Persistence;
 
@@ -15,18 +15,21 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<PriceTier> PriceTiers => Set<PriceTier>();
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    public DbSet<Driver> Drivers => Set<Driver>();
+    public DbSet<DeliveryBatch> DeliveryBatches => Set<DeliveryBatch>();
+    public DbSet<DeliveryItem> DeliveryItems => Set<DeliveryItem>();
+    public DbSet<User> Users => Set<User>();
+    public DbSet<OtpCode> OtpCodes => Set<OtpCode>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Apply all IEntityTypeConfiguration<T> classes from this assembly
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
 
-    // Global soft-delete query filter
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        // Store all decimals with precision (18,4) by default
         configurationBuilder.Properties<decimal>().HavePrecision(18, 4);
     }
 }
